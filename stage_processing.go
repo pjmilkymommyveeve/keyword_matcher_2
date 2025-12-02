@@ -13,12 +13,13 @@ import (
 //   - Phrase match (tokenized n-grams match keyword)
 //   - Substring match (keyword found with word boundaries)
 //
-// 4. Return "UNKNOWN_{stage}" if no match found
+// 4. Return "UNKNOWN" if no match found
+// Note: Returns only the category name without priority or stage suffix
 func (km *KeywordMatcher) ProcessStage(text, stage string) string {
 	// Get stage data
 	stageData, exists := km.stageMap[stage]
 	if !exists {
-		return "UNKNOWN_" + stage
+		return "UNKNOWN"
 	}
 
 	normalized := km.normalizeText(text)
@@ -78,5 +79,5 @@ func (km *KeywordMatcher) ProcessStage(text, stage string) string {
 	}
 
 	// Step 3: No match found
-	return "UNKNOWN_" + stage
+	return "UNKNOWN"
 }

@@ -139,41 +139,41 @@ func parseCategoryName(name string) *CategoryInfo {
 }
 
 // generateReturnValue creates the return value for a category match
-// Uses uppercase category name with stage suffix
+// Returns only the category name without priority or stage
 func generateReturnValue(baseName, stage string) string {
 	// Convert common category names to standard return values
 	switch baseName {
 	case "donotcall", "do_not_call":
-		return "DO_NOT_CALL_" + stage
+		return "DO_NOT_CALL"
 	case "honeypot":
-		return "HONEYPOT_" + stage
+		return "HONEYPOT"
 	case "answermachine", "answer_machine":
-		return "ANSWER_MACHINE_" + stage
+		return "ANSWER_MACHINE"
 	case "interested":
-		return "INTERESTED_" + stage
+		return "INTERESTED"
 	case "notinterested", "not_interested":
-		return "NOT_INTERESTED_" + stage
+		return "NOT_INTERESTED"
 	case "dnq":
-		return "DNQ_" + stage
+		return "DNQ"
 	case "busy":
-		return "BUSY_" + stage
+		return "BUSY"
 	case "already":
-		return "ALREADY_" + stage
+		return "ALREADY"
 	case "rebuttal":
-		return "REBUTTAL_" + stage
+		return "REBUTTAL"
 	case "neutral":
-		return "NEUTRAL_" + stage
+		return "NEUTRAL"
 	case "repeatpitch", "repeat_pitch":
-		return "REPEAT_PITCH_" + stage
+		return "REPEAT_PITCH"
 	case "greetingresponse", "greeting_response":
-		return "GREETING_RESPONSE_" + stage
+		return "GREETING_RESPONSE"
 	case "notfeelinggood", "not_feeling_good":
-		return "NOT_FEELING_GOOD_" + stage
+		return "NOT_FEELING_GOOD"
 	case "donttransfer", "dont_transfer":
-		return "DONT_TRANSFER_" + stage
+		return "DONT_TRANSFER"
 	default:
 		// Generic: uppercase the base name
-		return strings.ToUpper(baseName) + "_" + stage
+		return strings.ToUpper(baseName)
 	}
 }
 
