@@ -1,9 +1,5 @@
 package main
 
-import (
-	"strings"
-)
-
 // ProcessStage is the generic stage processor for any stage (s1, s2, s3, etc.)
 // It follows this matching order:
 // 1. Check hardcoded keywords first (with word boundaries only)
@@ -21,8 +17,6 @@ func (km *KeywordMatcher) ProcessStage(text, stage string) string {
 	if !exists {
 		return "unknown"
 	}
-
-	normalized := km.normalizeText(text)
 
 	// Step 1: Check hardcoded keywords first (word boundaries only)
 	if len(stageData.Hardcoded) > 0 {
@@ -61,19 +55,6 @@ func (km *KeywordMatcher) ProcessStage(text, stage string) string {
 			result := km.findBestMatch(text, currentPriorityCategories)
 			if result != nil {
 				return result.returnValue
-			}
-		}
-	}
-
-	// Special case handling for common patterns (optional, can be removed if not needed)
-	// These maintain backward compatibility with old behavior
-	if stage == "s3" || stage == "s4" { // pitch/rebuttal stages
-		if normalized == "no" || strings.HasPrefix(normalized, "no ") {
-			// Check if DNQ category exists for this stage
-			for _, catEntry := range stageData.Prioritized {
-				if catEntry.Info.BaseName == "dnq" {
-					return catEntry.Info.ReturnValue
-				}
 			}
 		}
 	}
