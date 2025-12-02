@@ -139,42 +139,11 @@ func parseCategoryName(name string) *CategoryInfo {
 }
 
 // generateReturnValue creates the return value for a category match
-// Returns only the category name without priority or stage
+// Returns the category base name as-is from the JSON file (without _pX_sX suffix)
+// The name is lowercased before returning
 func generateReturnValue(baseName, stage string) string {
-	// Convert common category names to standard return values
-	switch baseName {
-	case "donotcall", "do_not_call":
-		return "DO_NOT_CALL"
-	case "honeypot":
-		return "HONEYPOT"
-	case "answermachine", "answer_machine":
-		return "ANSWER_MACHINE"
-	case "interested":
-		return "INTERESTED"
-	case "notinterested", "not_interested":
-		return "NOT_INTERESTED"
-	case "dnq":
-		return "DNQ"
-	case "busy":
-		return "BUSY"
-	case "already":
-		return "ALREADY"
-	case "rebuttal":
-		return "REBUTTAL"
-	case "neutral":
-		return "NEUTRAL"
-	case "repeatpitch", "repeat_pitch":
-		return "REPEAT_PITCH"
-	case "greetingresponse", "greeting_response":
-		return "GREETING_RESPONSE"
-	case "notfeelinggood", "not_feeling_good":
-		return "NOT_FEELING_GOOD"
-	case "donttransfer", "dont_transfer":
-		return "DONT_TRANSFER"
-	default:
-		// Generic: uppercase the base name
-		return strings.ToUpper(baseName)
-	}
+	// Simply return the base name lowercased
+	return strings.ToLower(baseName)
 }
 
 // convertToStringSlice converts various JSON value types to string slice
